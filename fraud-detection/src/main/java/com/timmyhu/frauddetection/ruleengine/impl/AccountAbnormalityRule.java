@@ -16,6 +16,7 @@ public class AccountAbnormalityRule implements FraudRule {
     private static final Logger logger = LoggerFactory.getLogger(AccountAbnormalityRule.class);
     private static final Set<String> SUSPICIOUS_ACCOUNTS = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
+    //just for task. In production live enviorment,these data should be stored somewhere sush as data storage or cache.
     static {
         SUSPICIOUS_ACCOUNTS.add("zhangsan");
         SUSPICIOUS_ACCOUNTS.add("lisi");

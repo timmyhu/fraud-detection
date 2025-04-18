@@ -30,7 +30,6 @@ class JsonUtilTest {
     @Test
     void testFraudRecordSerialization() {
         FraudRecord record = new FraudRecord();
-        record.setTransactionId(1L);
         record.setFraudDetail("Suspicious amount");
         record.setDetectTime(new Date());
 
@@ -38,7 +37,6 @@ class JsonUtilTest {
         FraudRecord deserialized = JsonUtil.deserializeFraudRecord(json);
 
         assertNotNull(deserialized);
-        assertEquals(record.getTransactionId(), deserialized.getTransactionId());
         assertEquals(record.getFraudDetail(), deserialized.getFraudDetail());
         assertEquals(record.getDetectTime(), deserialized.getDetectTime());
     }

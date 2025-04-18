@@ -42,4 +42,20 @@ class AccountAbnormalityRuleTest {
         transaction.setToAccount("zhangsan");
         assertTrue(rule.isTransactionFraudulent(transaction));
     }
+
+    @Test
+    void testNullFromAccount() {
+        Transaction transaction = new Transaction();
+        transaction.setFromAccount(null);
+        transaction.setToAccount("normal1");
+        assertFalse(rule.isTransactionFraudulent(transaction));
+    }
+
+    @Test
+    void testNullToAccount() {
+        Transaction transaction = new Transaction();
+        transaction.setFromAccount("normal1");
+        transaction.setToAccount(null);
+        assertFalse(rule.isTransactionFraudulent(transaction));
+    }
 }

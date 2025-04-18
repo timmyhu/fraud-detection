@@ -7,11 +7,14 @@ import com.aliyun.openservices.log.request.PutLogsRequest;
 import com.aliyun.openservices.log.request.GetLogsRequest;
 import com.aliyun.openservices.log.response.GetLogsResponse;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlibabaDistributedLog implements DistributedLog {
+@Component
+public class AlibabaDistributedLog implements DistributedLog, InitializingBean {
 
     @Value("${aliyun.log.endpoint}")
     private String endpoint;
@@ -36,7 +39,8 @@ public class AlibabaDistributedLog implements DistributedLog {
 
     private Client client;
 
-    public AlibabaDistributedLog() {
+    @Override
+    public void afterPropertiesSet() {
         this.client = new Client(endpoint, accessKeyId, accessKeySecret);
     }
 
@@ -59,7 +63,6 @@ public class AlibabaDistributedLog implements DistributedLog {
     @Override
     public List<String> fetch(int messageNum) {
         try {
-            // 查询最近1小时内的日志
             int fromTime = (int)(System.currentTimeMillis() / 1000 - 3600);
             int toTime = (int)(System.currentTimeMillis() / 1000);
             String query = "* | select content order by __time__ desc limit " + messageNum;

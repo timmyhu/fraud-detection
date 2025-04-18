@@ -8,6 +8,6 @@ public interface FraudRecordService {
 
     void reportFraudRecord(FraudRecord record);
 
-    List<FraudRecord> getFraudRecords(int num);
+    List<String> getFraudRecords(int num);
 
 }

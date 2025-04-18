@@ -38,7 +38,6 @@ public class FraudDetectionConsumer {
             Transaction transaction = JsonUtil.deserializeTransaction(message);
             if (ruleEngineFacade.detectFraud(transaction)) {
                 FraudRecord record = new FraudRecord();
-                record.setTransactionId(transaction.getTransactionId());
                 record.setDetectTime(new Date());
                 record.setFraudDetail(message);
                 fraudRecordService.reportFraudRecord(record);
