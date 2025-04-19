@@ -1,8 +1,17 @@
 # Application Structure
-This repository contains two directories:
-
+This repository contains two top level subdirectories:
 - fraud-detection: Source code based on Spring and SpringBoot
-- resources: Documentation images, coverage reports, etc.
+  * src/main/com/timmyhu/frauddetection/controller     Spring MVC REST API endpoints
+  * src/main/com/timmyhu/frauddetection/service        Service layer
+  * src/main/com/timmyhu/frauddetection/ruleengine     Fraud detection rule engine layer  
+  * src/main/com/timmyhu/frauddetection/fraudtask      Consumer task layer for fraud detection
+  * src/main/com/timmyhu/frauddetection/middleware     Middleware layer
+  * Dockerfile   Docker image configuration
+  * deployment.yaml  Kubernetes deployment configuration
+  * service.yaml  Service exposure configuration
+  * hpa.yaml     Horizontal Pod Autoscaler configuration
+
+- resources: Documentation, images, coverage reports, etc.
 
 Technology Stack:
 - Spring
@@ -11,7 +20,6 @@ Technology Stack:
 - Alibaba Log Service
 - Fastjson
 - Logback
-
 
 # Installation Guide
 
@@ -50,7 +58,6 @@ kubectl apply -f service.yaml
 kubectl apply -f hpa.yaml
 ```
 
-
 # System Design
 ## Application Layered Architecture
 <center><img src="resources/images/application_layer.jpg"></center>
@@ -61,7 +68,6 @@ Benefits of layered architecture:
 - RuleEngine module is decoupled for easy replacement with other algorithms like AI
 - Interface-based programming for loose coupling and high cohesion (e.g. pluggable replacement from Alibaba Cloud to AWS)
 - Stateless design pattern supporting resilience and dynamic scaling
-
 
 ## Devops R&D and Deployment Topology
 <center><img src="resources/images/deploy_on_alibaba_cloud.jpg"></center>
