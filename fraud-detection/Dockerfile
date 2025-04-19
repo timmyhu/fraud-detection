@@ -16,7 +16,5 @@ COPY target/fraud-detection-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 
 # 启动命令(输出重定向到日志文件)
-ENTRYPOINT java -jar app.jar \
-  -Daliyun.log.accessKeyId=*** \
-  -Daliyun.log.accessKeySecret=*** \
-  > /app/logs/console.log 2>&1
+ENV JAVA_TOOL_OPTIONS="-D*** -Daliyun.log.accessKeySecret=***"
+ENTRYPOINT java -jar app.jar

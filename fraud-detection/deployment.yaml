@@ -16,14 +16,14 @@ spec:
     spec:
       containers:
       - name: springboot-app
-        image: crpi-t5ahmm8it9ift170.cn-hangzhou.personal.cr.aliyuncs.com/timmyhu/fraud_detection:0.0.1
+        image: crpi-t5ahmm8it9ift170.cn-hangzhou.personal.cr.aliyuncs.com/timmyhu/fraud_detection:0.0.2
         imagePullPolicy: Always  # 强制每次拉取最新镜像
         ports:
         - containerPort: 8080
         resources:
           requests:
             cpu: "100m"
-            memory: "200Mi"
+            memory: "100Mi"
           limits:
             cpu: "200m"
-            memory: "500Mi"
+            memory: "200Mi"
