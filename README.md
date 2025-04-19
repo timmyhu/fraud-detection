@@ -1,3 +1,18 @@
+# Application Structure
+This repository contains two directories:
+
+- fraud-detection: Source code based on Spring and SpringBoot
+- resources: Documentation images, coverage reports, etc.
+
+Technology Stack:
+- Spring
+- SpringBoot SpringMVC
+- Alibaba Message Service
+- Alibaba Log Service
+- Fastjson
+- Logback
+
+
 # Installation Guide
 
 - Build and package with Maven
