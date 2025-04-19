@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JsonUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fraud-detection</a> &gt; <a href="index.source.html" class="el_package">com.timmyhu.frauddetection.util</a> &gt; <span class="el_source">JsonUtil.java</span></div><h1>JsonUtil.java</h1><pre class="source lang-java linenums">package com.timmyhu.frauddetection.util;
+
+import com.alibaba.fastjson.JSON;
+import com.timmyhu.frauddetection.model.FraudRecord;
+import com.timmyhu.frauddetection.model.Transaction;
+
+<span class="nc" id="L7">public class JsonUtil {</span>
+
+    /**
+     * 将Transaction对象序列化为JSON字符串
+     * @param transaction 交易对象
+     * @return JSON字符串
+     */
+    public static String serializeTransaction(Transaction transaction) {
+<span class="fc" id="L15">        return JSON.toJSONString(transaction);</span>
+    }
+
+    /**
+     * 将JSON字符串反序列化为Transaction对象
+     * @param json JSON字符串
+     * @return Transaction对象
+     */
+    public static Transaction deserializeTransaction(String json) {
+<span class="fc" id="L24">        return JSON.parseObject(json, Transaction.class);</span>
+    }
+
+        /**
+     * 将Transaction对象序列化为JSON字符串
+     * @param fraudRecord 欺诈记录
+     * @return JSON字符串
+     */
+    public static String serializeFraudRecord(FraudRecord fraudRecord) {
+<span class="fc" id="L33">        return JSON.toJSONString(fraudRecord);</span>
+    }
+
+    /**
+     * 将JSON字符串反序列化为Transaction对象
+     * @param json JSON字符串
+     * @return Transaction对象
+     */
+    public static FraudRecord deserializeFraudRecord(String json) {
+<span class="fc" id="L42">        return JSON.parseObject(json, FraudRecord.class);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

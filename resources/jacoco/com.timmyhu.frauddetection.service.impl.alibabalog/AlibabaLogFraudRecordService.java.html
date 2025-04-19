@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AlibabaLogFraudRecordService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fraud-detection</a> &gt; <a href="index.source.html" class="el_package">com.timmyhu.frauddetection.service.impl.alibabalog</a> &gt; <span class="el_source">AlibabaLogFraudRecordService.java</span></div><h1>AlibabaLogFraudRecordService.java</h1><pre class="source lang-java linenums">package com.timmyhu.frauddetection.service.impl.alibabalog;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.timmyhu.frauddetection.middleware.DistributedLog;
+import com.timmyhu.frauddetection.model.FraudRecord;
+import com.timmyhu.frauddetection.service.FraudRecordService;
+import com.timmyhu.frauddetection.util.JsonUtil;
+
+@Service
+public class AlibabaLogFraudRecordService implements FraudRecordService{
+
+    private DistributedLog distributedLog;
+
+<span class="fc" id="L17">    public AlibabaLogFraudRecordService(DistributedLog distributedLog) {</span>
+<span class="fc" id="L18">        this.distributedLog = distributedLog;</span>
+<span class="fc" id="L19">    }</span>
+
+    @Override
+    public void reportFraudRecord(FraudRecord record) {
+<span class="fc" id="L23">        String message = JsonUtil.serializeFraudRecord(record);</span>
+<span class="fc" id="L24">        distributedLog.reportLog(message);</span>
+<span class="fc" id="L25">    }</span>
+
+    @Override
+    public List&lt;String&gt; getFraudRecords(int num) {
+<span class="fc" id="L29">        return distributedLog.fetch(num);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

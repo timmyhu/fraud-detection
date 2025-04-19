@@ -1,0 +1,17 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+fraud-detection,com.timmyhu.frauddetection.util,JsonUtil,3,16,0,0,1,4,1,4,1,4
+fraud-detection,com.timmyhu.frauddetection.fraudtask,FraudDetectionConsumer,6,58,0,2,2,17,0,4,0,3
+fraud-detection,com.timmyhu.frauddetection.service.impl.kafka,KafkaTransactionService,0,16,0,0,0,6,0,2,0,2
+fraud-detection,com.timmyhu.frauddetection.controller,DetectionRecordController,5,3,0,0,1,1,1,1,1,1
+fraud-detection,com.timmyhu.frauddetection.controller,TransactionController,0,12,0,0,0,5,0,2,0,2
+fraud-detection,com.timmyhu.frauddetection.config,KafkaConfig,0,85,0,0,0,18,0,4,0,4
+fraud-detection,com.timmyhu.frauddetection.ruleengine.impl,AmountFraudRule,0,27,0,4,0,6,0,5,0,3
+fraud-detection,com.timmyhu.frauddetection.ruleengine.impl,AccountAbnormalityRule,0,57,0,10,0,15,0,8,0,3
+fraud-detection,com.timmyhu.frauddetection,FraudDetectionApplication,5,3,0,0,2,1,1,1,1,1
+fraud-detection,com.timmyhu.frauddetection.service.impl.alibabalog,AlibabaLogFraudRecordService,0,19,0,0,0,7,0,3,0,3
+fraud-detection,com.timmyhu.frauddetection.ruleengine,RuleEngineFacade,0,39,0,2,0,11,0,5,0,4
+fraud-detection,com.timmyhu.frauddetection.model,Transaction,0,31,0,0,0,13,0,9,0,9
+fraud-detection,com.timmyhu.frauddetection.model,FraudRecord,0,17,0,0,0,7,0,5,0,5
+fraud-detection,com.timmyhu.frauddetection.middleware.impl,AlibabaKafkaProducer,0,55,0,2,0,15,0,5,0,4
+fraud-detection,com.timmyhu.frauddetection.middleware.impl,AlibabaDistributedLog,0,122,0,2,0,25,0,5,0,4
+fraud-detection,com.timmyhu.frauddetection.middleware.impl,KafkaProducerConfig,0,34,0,0,0,7,0,3,0,3

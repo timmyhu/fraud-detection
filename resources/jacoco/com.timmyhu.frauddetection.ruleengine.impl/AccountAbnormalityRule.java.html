@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountAbnormalityRule.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fraud-detection</a> &gt; <a href="index.source.html" class="el_package">com.timmyhu.frauddetection.ruleengine.impl</a> &gt; <span class="el_source">AccountAbnormalityRule.java</span></div><h1>AccountAbnormalityRule.java</h1><pre class="source lang-java linenums">package com.timmyhu.frauddetection.ruleengine.impl;
+
+import com.timmyhu.frauddetection.model.Transaction;
+import com.timmyhu.frauddetection.ruleengine.FraudRule;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import java.util.Collections;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+
+@Component
+<span class="fc" id="L14">public class AccountAbnormalityRule implements FraudRule {</span>
+
+<span class="fc" id="L16">    private static final Logger logger = LoggerFactory.getLogger(AccountAbnormalityRule.class);</span>
+<span class="fc" id="L17">    private static final Set&lt;String&gt; SUSPICIOUS_ACCOUNTS = Collections.newSetFromMap(new ConcurrentHashMap&lt;&gt;());</span>
+
+    //just for task. In production live enviorment,these data should be stored somewhere sush as data storage or cache.
+    static {
+<span class="fc" id="L21">        SUSPICIOUS_ACCOUNTS.add(&quot;zhangsan&quot;);</span>
+<span class="fc" id="L22">        SUSPICIOUS_ACCOUNTS.add(&quot;lisi&quot;);</span>
+<span class="fc" id="L23">        SUSPICIOUS_ACCOUNTS.add(&quot;wangwu&quot;);</span>
+<span class="fc" id="L24">    }</span>
+
+    @Override
+    public boolean isTransactionFraudulent(Transaction transaction) {
+<span class="fc bfc" id="L28" title="All 4 branches covered.">        if (transaction.getFromAccount() == null || transaction.getToAccount() == null) {</span>
+<span class="fc" id="L29">            return false;</span>
+        }
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        boolean isFraud = SUSPICIOUS_ACCOUNTS.contains(transaction.getFromAccount()) || </span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">                         SUSPICIOUS_ACCOUNTS.contains(transaction.getToAccount());</span>
+        
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (isFraud) {</span>
+<span class="fc" id="L35">            logger.warn(&quot;检测到可疑账户交易，from: {}, to: {}&quot;, </span>
+<span class="fc" id="L36">                       transaction.getFromAccount(), transaction.getToAccount());</span>
+        }
+        
+<span class="fc" id="L39">        return isFraud;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

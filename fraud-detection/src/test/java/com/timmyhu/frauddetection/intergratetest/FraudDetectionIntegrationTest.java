@@ -1,4 +1,4 @@
-package com.timmyhu.frauddetection.integration;
+package com.timmyhu.frauddetection.intergratetest;
 
 import org.junit.jupiter.api.Test;
 import java.net.URI;
