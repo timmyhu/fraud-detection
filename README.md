@@ -53,7 +53,7 @@ kubectl apply -f hpa.yaml
 
 # System Design
 ## Application Layered Architecture
-<center><img src="resources/images/application_layer.jpg" width="60%"></center>
+<center><img src="resources/images/application_layer.jpg" width="80%"></center>
 Benefits of layered architecture:
 
 - Clear hierarchy and reasonable design
@@ -64,7 +64,7 @@ Benefits of layered architecture:
 
 
 ## Devops R&D and Deployment Topology
-<center><img src="resources/images/deploy_on_alibaba_cloud.jpg" width="75%"></center>
+<center><img src="resources/images/deploy_on_alibaba_cloud.jpg" width="80%"></center>
 
 Integrated Devops workflow using githook for code-as-service development
 
@@ -95,12 +95,14 @@ curl -X GET "http://121.41.68.171/detection-record/list" \
 JUnit test coverage exceeds 95%
 [View Coverage Report](resources/jacoco/index.html)
 
+<center><img src="resources/images/test_coverage.png" width="80%"></center>
+
 ## Resilience Testing
 ### Alibaba k8s Deployment Overview
-<center><img src="resources/images/alibaba_k8s_origin.png" width="75%"></center>
+<center><img src="resources/images/alibaba_k8s_origin.png" width="80%"></center>
 
 ### Alibaba k8s HPA Overview
-<center><img src="resources/images/hpa.png" width="75%"></center>
+<center><img src="resources/images/hpa.png" width="80%"></center>
 
 ### Resilience Verification
 The stateless design ensures service continuity during outages or scaling. 
