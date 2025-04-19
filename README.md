@@ -85,7 +85,7 @@ curl -X POST \
     "amount": 80000
   }'
 ```
-Check if the transaction was blocked:
+Check if the transaction was been detected as fraud:
 ```bash
 curl -X GET "http://121.41.68.171/detection-record/list" \
      -H "User-Agent: Mozilla/5.0" \
