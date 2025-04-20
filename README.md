@@ -13,6 +13,11 @@ This repository contains two top level subdirectories:
 
 - resources: Documentation, images, coverage reports, etc.
 
+Application functional features
+- Simulate transaction: The system inserts transaction data through Spring MVC Restful API, which will be stored in Alibaba Message System
+- Fraud detection: A Kafka consumer task consumes transaction data in real-time from Alibaba Message System, then uses rule engine to detect potential fraud. Detected fraud cases will be reported to Alibaba Log Service. Multiple consumers can be dynamically scaled to ensure high availability and reliability
+- Fraud record query: Another Restful API queries the latest fraud records from Alibaba Log Service
+
 Technology Stack:
 - Spring
 - SpringBoot SpringMVC
@@ -68,6 +73,7 @@ Benefits of layered architecture:
 - RuleEngine module is decoupled for easy replacement with other algorithms like AI
 - Interface-based programming for loose coupling and high cohesion (e.g. pluggable replacement from Alibaba Cloud to AWS)
 - Stateless design pattern supporting resilience and dynamic scaling
+- All layers including access layer, application layer and data layer are designed without single points of failure, meeting non-functional requirements like high availability, performance and reliability in large-scale applications.
 
 ## Devops R&D and Deployment Topology
 <center><img src="resources/images/deploy_on_alibaba_cloud.jpg"></center>
@@ -79,7 +85,7 @@ Integrated Devops workflow using githook for code-as-service development
 An automated integration test case is provided in the code repository
 Run directly: [Integration Test Code](fraud-detection/src/test/java/com/timmyhu/frauddetection/intergratetest/FraudDetectionIntegrationTest.java)
 ## Manual Testing
-Simulate a transaction:
+Simulate a transaction: 这个接口会将记录发送到Alibaba Message system. 同时如果检测到欺诈行为，会上报Alibaba Log Service
 ```bash
 curl -X POST \
   http://121.41.68.171/transaction \
@@ -91,7 +97,7 @@ curl -X POST \
     "amount": 80000
   }'
 ```
-Check if the transaction was been detected as fraud:
+Check if the transaction was been detected as fraud: 从Alibaba Log Service查询欺诈行为的日志记录
 ```bash
 curl -X GET "http://121.41.68.171/detection-record/list" \
      -H "User-Agent: Mozilla/5.0" \
