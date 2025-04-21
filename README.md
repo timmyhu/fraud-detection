@@ -1,21 +1,22 @@
 # Application Structure
 This repository contains two top level subdirectories:
 - fraud-detection: Source code based on Spring and SpringBoot
-  * src/main/com/timmyhu/frauddetection/controller     Spring MVC REST API endpoints
-  * src/main/com/timmyhu/frauddetection/service        Service layer
-  * src/main/com/timmyhu/frauddetection/ruleengine     Fraud detection rule engine layer  
-  * src/main/com/timmyhu/frauddetection/fraudtask      Consumer task layer for fraud detection
-  * src/main/com/timmyhu/frauddetection/middleware     Middleware layer
-  * Dockerfile   Docker image configuration
-  * deployment.yaml  Kubernetes deployment configuration
-  * service.yaml  Service exposure configuration
-  * hpa.yaml     Horizontal Pod Autoscaler configuration
+  * src/main/com/timmyhu/frauddetection/controller :    Spring MVC REST API endpoints
+  * src/main/com/timmyhu/frauddetection/service :   Service layer
+  * src/main/com/timmyhu/frauddetection/ruleengine :     Fraud detection rule engine layer  
+  * src/main/com/timmyhu/frauddetection/fraudtask :     Consumer task layer for fraud detection
+  * src/main/com/timmyhu/frauddetection/middleware :    Middleware layer
+  * Dockerfile :  Docker image configuration
+  * deployment.yaml :  Kubernetes deployment configuration
+  * service.yaml : Service exposure configuration
+  * hpa.yaml :    Horizontal Pod Autoscaler configuration
 
 - resources: Documentation, images, coverage reports, etc.
 
 Application functional features
 - Simulate transaction: The system inserts transaction data through Spring MVC Restful API, which will be stored in Alibaba Message System
 - Fraud detection: A Kafka consumer task consumes transaction data in real-time from Alibaba Message System, then uses rule engine to detect potential fraud. Detected fraud cases will be reported to Alibaba Log Service. Multiple consumers can be dynamically scaled to ensure high availability and reliability
+- Rule Engine: Implements two fraud detection rules - one validates based on amount thresholds, the other checks for suspicious accounts
 - Fraud record query: Another Restful API queries the latest fraud records from Alibaba Log Service
 
 Technology Stack:
@@ -69,7 +70,7 @@ kubectl apply -f hpa.yaml
 Benefits of layered architecture:
 
 - Clear hierarchy and reasonable design
-- Each layer handles its own business logic
+- Each layer handles its own business logic  
 - RuleEngine module is decoupled for easy replacement with other algorithms like AI
 - Interface-based programming for loose coupling and high cohesion (e.g. pluggable replacement from Alibaba Cloud to AWS)
 - Stateless design pattern supporting resilience and dynamic scaling
@@ -85,7 +86,7 @@ Integrated Devops workflow using githook for code-as-service development
 An automated integration test case is provided in the code repository
 Run directly: [Integration Test Code](fraud-detection/src/test/java/com/timmyhu/frauddetection/intergratetest/FraudDetectionIntegrationTest.java)
 ## Manual Testing
-Simulate a transaction: 这个接口会将记录发送到Alibaba Message system. 同时如果检测到欺诈行为，会上报Alibaba Log Service
+Simulate a transaction: This interface sends records to Alibaba Message system. If fraud is detected, it will be reported to Alibaba Log Service
 ```bash
 curl -X POST \
   http://121.41.68.171/transaction \
@@ -97,7 +98,7 @@ curl -X POST \
     "amount": 80000
   }'
 ```
-Check if the transaction was been detected as fraud: 从Alibaba Log Service查询欺诈行为的日志记录
+Check if the transaction was detected as fraud: Query fraud detection logs from Alibaba Log Service
 ```bash
 curl -X GET "http://121.41.68.171/detection-record/list" \
      -H "User-Agent: Mozilla/5.0" \
